@@ -1,9 +1,9 @@
 Savepoint sp = Database.setSavepoint();
 try {
-    renumberBundle('01t1t000000HbNBAA0', 20, TRUE, 10);
+    renumberBundle('< bundle id here>', 20, TRUE, 10);
 } catch(Exception e) {
     Database.rollback(sp);
-    System.debug('## ERREUR'+e);
+    System.debug('## ERROR '+e);
 }
 
 private void renumberBundle(Id bundleId, Integer newBundleNumber, Boolean renumberFeatures, Integer step) {
@@ -34,7 +34,7 @@ private void renumberFeature(Id featureId, Integer newFeatureNumber, Integer ste
 	Integer optionNumber = step;
 	for(SBQQ__ProductOption__c opt : options) {
 		opt.SBQQ__Number__c = optionNumber;
-		optionNumber++;
+		optionNumber += step;
 	}
 	update options;
 }
